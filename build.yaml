@@ -1,0 +1,9 @@
+targets:
+  $default:
+    builders:
+      json_serializable:
+        generate_for:
+          - lib/models/*.dart
+          - lib/network/response?/*.dart
+          - lib/network/Entity/*.dart
+          - lib/*.dart
