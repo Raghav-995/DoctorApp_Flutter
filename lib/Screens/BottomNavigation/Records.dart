@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:Seerecs/Screens/BottomNavigation%20Screens/BottomNavigationContentScreens/MyActivity.dart';
 import 'package:Seerecs/Screens/Record_screens/Allergies.dart';
 import 'package:Seerecs/Screens/Record_screens/EmptyScreen.dart';
 import 'package:dio/dio.dart';
@@ -230,7 +231,11 @@ finally {
                                IconButton(onPressed: (){ 
                                },
                                icon: Icon(Icons.message_outlined,color: Colors.black,)),
-                                TextButton(onPressed: logout, child: badges.Badge(child: Icon(Icons.notification_important_outlined,color: Colors.black,),position: badges.BadgePosition.topEnd(top: -3, end: -3),)),                                
+                                TextButton(onPressed: (){
+                                     getDataTypes("Notifications");
+                                }, 
+                                child: badges.Badge(child: Icon(Icons.notification_important_outlined,color: Colors.black,),
+                                position: badges.BadgePosition.topEnd(top: -3, end: -3),)),                                
                                 GestureDetector(
                                   onTap: logout,
                                   child:
@@ -297,91 +302,97 @@ finally {
                           SizedBox(
                             width: 10.0,
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(80),
-                                topRight: Radius.circular(80),
-                                bottomLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
+                          InkWell(
+                            onTap: (){ getDataTypes("Patient Portal");},
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(80),
+                                  topRight: Radius.circular(80),
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15),
+                                ),
+                                //borderRadius: BorderRadius.circular(15),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFEAADFF),
+                                    Color(0xFFF6DCFF),
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
                               ),
-                              //borderRadius: BorderRadius.circular(15),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color(0xFFEAADFF),
-                                  Color(0xFFF6DCFF),
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(children: [
-                                CircleAvatar(
-                                  radius: 30,
-                                  backgroundColor: Colors.white,
-                                  child: Image.asset(
-                                    "assets/patient 2.png",
-                                    height: 40.h,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(children: [
+                                  CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.white,
+                                    child: Image.asset(
+                                      "assets/patient 2.png",
+                                      height: 40.h,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Patient Portal',
-                                  style: TextStyle(
-                                      color: Color(0xFF7B498C),
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ]),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Patient Portal',
+                                    style: TextStyle(
+                                        color: Color(0xFF7B498C),
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ]),
+                              ),
                             ),
                           ),
                           SizedBox(
                             width: 10.0,
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(80),
-                                topRight: Radius.circular(80),
-                                bottomLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
+                          InkWell(
+                            onTap: (){Navigator.push(context, MaterialPageRoute(builder: (_){return MyActivity();}));},
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(80),
+                                  topRight: Radius.circular(80),
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15),
+                                ),
+                                //borderRadius: BorderRadius.circular(15),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF8E92FF),
+                                    Color(0xFFCBCEFF),
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
                               ),
-                              //borderRadius: BorderRadius.circular(15),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color(0xFF8E92FF),
-                                  Color(0xFFCBCEFF),
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(children: [
-                                CircleAvatar(
-                                  radius: 30,
-                                  backgroundColor: Colors.white,
-                                  child: Image.asset(
-                                    "assets/log 1.png",
-                                    height: 40.h,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(children: [
+                                  CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.white,
+                                    child: Image.asset(
+                                      "assets/log 1.png",
+                                      height: 40.h,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Log History',
-                                  style: TextStyle(
-                                      color: Color(0xFF474989),
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ]),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Log History',
+                                    style: TextStyle(
+                                        color: Color(0xFF474989),
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ]),
+                              ),
                             ),
                           ),
                           SizedBox(

@@ -1,6 +1,0 @@
-
-class Iconsnew {
-  Iconsnew._();
-
-  
-}
