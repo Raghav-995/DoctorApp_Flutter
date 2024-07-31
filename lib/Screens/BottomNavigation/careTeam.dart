@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Assets/CareTeamModel.dart';
@@ -164,7 +165,20 @@ class _CareTeamState extends State<CareTeam> {
     if (isLoading) {
       // Show a loading indicator while data is being fetched
       return Center(
-        child: CircularProgressIndicator(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SpinKitFadingCircle(
+              color: Colors.blue,
+              size: 50.0,
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Loading, please wait...',
+              style: TextStyle(fontSize: 18.0),
+            ),
+          ],
+        ),
       );
     } else {
       // Data fetching is completed

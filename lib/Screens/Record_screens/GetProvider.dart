@@ -240,8 +240,7 @@ class _getProviderState extends State<getProvider> {
                   createdAt =
                       DateTime.now(); // Default value (current date and time)
                 }
-    String formattedDate = DateFormat('yyyy-MM-dd').format(createdAt);
-    String time = DateFormat('kk:mm').format(createdAt);
+    String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(createdAt);
                 // Determine imagePath based on the available fields in your response?
                 // For this example, let's use a default image path
                 return Padding(
@@ -300,7 +299,7 @@ class _getProviderState extends State<getProvider> {
                                         fontWeight: FontWeight.w600),
                                   ),
                                   SizedBox(
-                                    width: 3.0,
+                                    width: 1.0,
                                   ),
                                   Text(
                                     lastName,
@@ -314,7 +313,7 @@ class _getProviderState extends State<getProvider> {
                                 ],
                               ),
                               SizedBox(
-                                width: 45,
+                                width: 50,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -332,7 +331,7 @@ class _getProviderState extends State<getProvider> {
                             ],
                           ),
                           subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            //mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
                                   designation,
@@ -344,19 +343,11 @@ class _getProviderState extends State<getProvider> {
                                     //fontWeight: FontWeight.w600
                                   ),
                                 ),
-                                
-                                Text(
-                                  'PH: ${contactNo}',
-                                  style: TextStyle(
-                                    height: 2.2,
-                                    color: Color(0xFF37304A),
-                                    fontSize: 18.sp,
-                                    fontFamily: 'Roboto-Regular',
-                                    //fontWeight: FontWeight.w600
-                                  ),
+                                SizedBox(
+                                  width: 30,
                                 ),
                                 Text(
-                                  time,
+                                  contactNo,
                                   style: TextStyle(
                                     height: 2.2,
                                     color: Color(0xFF37304A),

@@ -73,6 +73,7 @@ dependencies:
   is_lock_screen2: ^2.0.1
   badges: ^3.1.2
   url_launcher: ^6.3.0
+  flutter_spinkit: ^5.2.1
 
 
 

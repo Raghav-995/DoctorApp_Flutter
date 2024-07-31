@@ -590,7 +590,7 @@ class _AddProviderState extends State<AddProvider> {
                                   ),
                                   data: providerData(),
                                 );
-                                String profileImagePath = response.data['provider']['profileImagePath'];
+                                String profileImagePath = response.data['provider']['profileImagePath']?? 'kk';
                                 print('response status: ${response.statusCode}');
                                 print('response body: ${response}');
                                 print('response headers: ${response.headers[HttpHeaders.authorizationHeader]}');
@@ -635,7 +635,8 @@ class _AddProviderState extends State<AddProvider> {
                       ),
                     ],
                   ),
-                ),
+                ), if(isLoading)
+                CircularProgressIndicator()
               ],
             ),
           ),

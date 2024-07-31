@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:core';
-
 import 'package:Seerecs/Assets/CareTeamModel.dart';
 import 'package:Seerecs/Screens/CareTeam/AddCare.dart';
 import 'package:Seerecs/Screens/CareTeam/GetProvider.dart';
@@ -237,7 +236,7 @@ class _getCareteamState extends State<GetCareteam> {
                 try {
                   String createdAtString = memberData['createdAt'] ?? '';
                   if (createdAtString.isNotEmpty) {
-                    createdAt = format.parse(createdAtString);
+                    createdAt = DateTime.parse(createdAtString);
                   } else {
                     createdAt =
                         DateTime.now(); // Default value (current date and time)
@@ -275,6 +274,7 @@ class _getCareteamState extends State<GetCareteam> {
                           color: Colors.white,
                         ),
                         child: Card(
+                          color: Colors.white,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -574,7 +574,7 @@ class _getCareteamState extends State<GetCareteam> {
                   //alignment: AlignmentDirectional.center,
                   children: [
                     CircleAvatar(
-                      backgroundColor: Color(0xFFECEFFB),
+                      backgroundColor: Color.fromARGB(255, 71, 95, 190),
                       radius: 35.r,
                       child: Image.asset(
                         imageAsset,

@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:badges/badges.dart' as badges;
 import '../../Assets/CustomPageRoute.dart';
 import '../LoginScreen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Records extends StatefulWidget {
   const Records({super.key});
@@ -172,7 +173,23 @@ finally {
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height) / 5.5;
     final double itemWidth = size.width / 2.5;
-    return Padding(
+    return  isloading? Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SpinKitFadingCircle(
+              color: Colors.blue,
+              size: 50.0,
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Loading, please wait...',
+              style: TextStyle(fontSize: 18.0),
+            ),
+          ],
+        ),
+      )
+     :Padding(
       padding: devicePadding,
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -230,7 +247,7 @@ finally {
                     //   height: 5,
                     // ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         
@@ -254,7 +271,7 @@ finally {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(12.0),
                               child: Column(children: [
                                 CircleAvatar(
                                   radius: 30,
@@ -278,7 +295,7 @@ finally {
                             ),
                           ),
                           SizedBox(
-                            width: 14.0,
+                            width: 10.0,
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -323,7 +340,7 @@ finally {
                             ),
                           ),
                           SizedBox(
-                            width: 14.0,
+                            width: 10.0,
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -370,10 +387,12 @@ finally {
                           SizedBox(
                             width: 8.w,
                           ),
-                          Image.asset(
-                            'assets/Dio-02 1.png',
-                            height: 120.h,
-                            //width: 50,
+                          Expanded(
+                            child: Image.asset(
+                              'assets/Dio-02 1.png',
+                              height: 120.h,
+                              //width: 50,
+                            ),
                           ),
                         ],
                       ),
@@ -427,25 +446,28 @@ finally {
                               ),
                             ),
                           ),
-                          GridView.count(
+                       GridView.count(
                            shrinkWrap: true,
                            childAspectRatio: (itemWidth / itemHeight),
                            padding: EdgeInsets.only(
-                          left: 20, right: 20, top: 10, bottom: 10),
+                          left: 15, right: 15, top: 10, bottom: 10),
                            crossAxisCount: 3,
-                           crossAxisSpacing: 10,
-                           mainAxisSpacing: 10,
+                           crossAxisSpacing: 8.0,
+                           mainAxisSpacing: 8.0,
                             children: //myList.map((data) {
                              List.generate(myList.length, (index) {
                                 return GestureDetector(
                                   onTap: (){
-                                    
+                                    setState(() {
+                                      isloading = true;
+                                    });
                                     String dataType = myList[index].title;
                                     
                                       getDataTypes(dataType);
                                       
                                       },
                                   child: Container(
+                                  
                                   decoration: BoxDecoration(
                                     border:
                                         Border.all(color: Colors.white, width: 2),
@@ -462,7 +484,7 @@ finally {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Image.asset(myList[index].image, width: 40),
+                                      Image.asset(myList[index].image, width: 35),
                                       SizedBox(height: 5),
                                       Text(
                                         myList[index].title,
@@ -477,7 +499,7 @@ finally {
                                       SizedBox(height: 5),
                                       Container(
                                         //width: 160,
-                                        height: 18,
+                                        height: 16,
                                         child: TextButton(
                                             child: Text(myList[index].event,
                                                 style: TextStyle(fontSize: 11)),
@@ -503,10 +525,10 @@ finally {
                                             // Navigator.of(context).push(MaterialPageRoute(builder: (_){return  Allergies(medicalType: data.title, reports: Immnunization,);},));
                                             }),
                                       ),
-                                 
+                                                                   
                                     ],
                                   ),
-                                 ),
+                                                                   ),
                                 );
                              }),
                              
@@ -557,13 +579,12 @@ finally {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 100,
+                    Expanded(
+                      child: SizedBox(
+                        height: 50,
+                      ),
                     ),
-                    if (isloading)
-          Center(
-            child: CircularProgressIndicator(),
-          ),
+     
                   ]),
             ),
           ),
