@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:Seerecs/CustomCards/Immnunizations.dart';
 import 'package:Seerecs/Screens/Record_screens/Allergies.dart';
 import 'package:Seerecs/Screens/Record_screens/EmptyScreen.dart';
 import 'package:dio/dio.dart';
@@ -76,7 +75,7 @@ class Records extends StatefulWidget {
 
 class _RecordsState extends State<Records> {
   String? _firstName;
-  
+    bool isloading = false;
 
   Future<void> getUserInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -94,19 +93,23 @@ class _RecordsState extends State<Records> {
   }
 
 Future<void> getDataTypes(String dataType) async{
-  final SharedPreferences sharedPreferences =
+  setState(() {
+      isloading = true;
+    });
+  try{ 
+    final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     final String? obtainedToken = sharedPreferences.getString('token');
 
-    var head = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjllNGFjYjJhYTg3ZDVkYWZlZjUyYzciLCJpYXQiOjE3MjE5MDUxMDksImV4cCI6MTcyMTk5MTUwOX0.iPdaCnQAduvA_of5XBJqSJqVTUqfXZyfOj2EMx-GVXY';
+    //var head = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjllNGFjYjJhYTg3ZDVkYWZlZjUyYzciLCJpYXQiOjE3MjE5MDUxMDksImV4cCI6MTcyMTk5MTUwOX0.iPdaCnQAduvA_of5XBJqSJqVTUqfXZyfOj2EMx-GVXY';
     var header = {
   'Authorization': 'Bearer ${obtainedToken}',
   'Content-Type': 'application/json'
 };
-var headers = {
-  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjllNGFjYjJhYTg3ZDVkYWZlZjUyYzciLCJpYXQiOjE3MjIyNTEwNjgsImV4cCI6MTcyMjMzNzQ2OH0.V47FVo46ZBwJZ5HiQmzXY4ieLOqoFpllraaIHSC2CTA',
-  'Content-Type': 'application/json'
-};
+//var headers = {
+  //'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjllNGFjYjJhYTg3ZDVkYWZlZjUyYzciLCJpYXQiOjE3MjIyNTEwNjgsImV4cCI6MTcyMjMzNzQ2OH0.V47FVo46ZBwJZ5HiQmzXY4ieLOqoFpllraaIHSC2CTA',
+  //'Content-Type': 'application/json'
+//};
 print(dataType);
 var data = json.encode({
   "dataTypes": [
@@ -135,6 +138,12 @@ else {
   print(response.statusMessage);
 }
 }
+finally {
+      setState(() {
+        isloading = false;
+      });
+    }
+}
 
   @override
   void initState() {
@@ -158,7 +167,7 @@ else {
 
   @override
   Widget build(BuildContext context) {
-    bool isloading = false;
+  
     EdgeInsets devicePadding = MediaQuery.of(context).viewPadding;
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height) / 5.5;
@@ -430,7 +439,9 @@ else {
                              List.generate(myList.length, (index) {
                                 return GestureDetector(
                                   onTap: (){
+                                    
                                     String dataType = myList[index].title;
+                                    
                                       getDataTypes(dataType);
                                       
                                       },
@@ -492,9 +503,10 @@ else {
                                             // Navigator.of(context).push(MaterialPageRoute(builder: (_){return  Allergies(medicalType: data.title, reports: Immnunization,);},));
                                             }),
                                       ),
+                                 
                                     ],
                                   ),
-                                                                ),
+                                 ),
                                 );
                              }),
                              
@@ -548,6 +560,10 @@ else {
                     SizedBox(
                       height: 100,
                     ),
+                    if (isloading)
+          Center(
+            child: CircularProgressIndicator(),
+          ),
                   ]),
             ),
           ),
@@ -675,7 +691,7 @@ Widget row(int index) {//GridView.count(
                                               ))),
                                           onPressed: (){
                                             
-                                          String n = myList[1].title;
+                                          //String n = myList[1].title;
                                           // Navigator.of(context).push(MaterialPageRoute(builder: (_){return  Allergies(medicalType: data.title, reports: Immnunization,);},));
                                           }),
                                     ),

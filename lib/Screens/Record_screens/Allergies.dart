@@ -17,7 +17,7 @@ class Allergies extends StatelessWidget{
   @override
  Widget build(BuildContext context){
   String isoDate = reports!["fhirData"][0]["occurrenceDateTime"]?? "12:30";
-  String result ;
+  //String result ;
   DateTime parsedDate;
   String formattedDate = reports!["fhirData"][0]["occurrenceDateTime"] ?? '12:30';
   String link = reports!["fhirData"][0]["meta"]["profile"][0] ?? '';
