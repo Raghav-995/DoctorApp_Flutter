@@ -1,9 +1,10 @@
 import 'package:Seerecs/Screens/BottomNavigation/Records.dart';
 import 'package:Seerecs/Screens/Record_screens/DisplayScreen.dart';
+import 'package:Seerecs/Screens/Record_screens/Predictions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 var icons = [
 "Vectorglucose.png","Vector.png","Hib.png","DTaP.png","Vectorcreatinine.png","Vheart.png","VVomiting.png","VectorWheal.png","DTaP.png","Vector.png"
 ];
@@ -67,6 +68,25 @@ appBar: AppBar(
   padding: const EdgeInsets.symmetric(vertical:10.0,horizontal: 10.0),
   child: Column(
     children: [
+      if(reports!["fhirData"][0]["resourceType"]== "Observation")
+                    Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0),color:  Color(0xFFB2A0FB),),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.asset('assets/caredyno.png',width: 100,height: 80,),
+                            Column(children: [
+                              Text("We Have A Prediction",style: TextStyle(color: Colors.black,fontSize: 16.0,fontWeight: FontWeight.bold),),
+                              Text("Loreum Epsum",style: TextStyle(color: Colors.white,fontSize: 16.0))
+                            ],),
+                            IconButton(onPressed: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (_){return Predictions();}));
+                            }, icon: FaIcon(FontAwesomeIcons.arrowRight))
+                          ],
+                        ),),
+                    ),
       Expanded(
         child: ListView.builder(
         itemCount: reports!["fhirData"].length,
