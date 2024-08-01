@@ -297,7 +297,7 @@ class _AddProviderState extends State<AddProvider> {
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                             ),
-                            hintText: 'Contact no.',
+                            hintText: '+1(123) 456-7890 | +919876543210',
                             hintStyle: TextStyle(
                               fontFamily: 'Roboto-Regular',
                               color: Color(0xFFB5B4BD),
@@ -313,16 +313,20 @@ class _AddProviderState extends State<AddProvider> {
                           // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                           // Validation will be done here
                           validator: (value) {
-                            final isDigitsOnly = int.tryParse(value!);
+                           // final isDigitsOnly = int.tryParse(value!);
+                            // US phone number validation regex
+                            final _usPhoneRegex = RegExp(r'^\+1\(\d{3}\) \d{3}-\d{4}$');
+                            // India phone number validation regex
+                            final _indiaPhoneRegex = RegExp(r'^\+91[6-9]\d{9}$');
 
-                            if ((isDigitsOnly == null) ||
-                                (value.toString().length < 10) ||
-                                (value.toString().length > 10) ||
-                                value.toString().isEmpty) {
-                              return "Please enter mobile number";
+                            if (value == null || value.isEmpty) {
+                                  return 'Please enter a phone number';
                             }
-                            return null;
-                          },
+                            if (_usPhoneRegex.hasMatch(value) || _indiaPhoneRegex.hasMatch(value)) {
+                                  return null;
+                            }
+                                  return 'Enter a valid US or India phone number';
+                            }
                         ),
                       ),
                     ),
@@ -554,18 +558,21 @@ class _AddProviderState extends State<AddProvider> {
                         width: 45,
                       ),
                       Expanded(
-                        child: GestureDetector(
-                          onTapDown: (_) {
+                        child: _isButtonPressed? CircularProgressIndicator(): GestureDetector(
+                         // onTapDown: (_) {
+                           // setState(() {
+                             // _isButtonPressed = true;
+                            //});
+                          //},
+                          //onTapUp: (_) {
+                            //setState(() {
+                             // _isButtonPressed = false;
+                            //});
+                          //},
+                          onTap: () async {
                             setState(() {
                               _isButtonPressed = true;
                             });
-                          },
-                          onTapUp: (_) {
-                            setState(() {
-                              _isButtonPressed = false;
-                            });
-                          },
-                          onTap: () async {
                             final isValid = _form.currentState!.validate();
                             print('isValid: $isValid');
 
@@ -606,7 +613,9 @@ class _AddProviderState extends State<AddProvider> {
                               } catch (e) {
                                 // Handle any exceptions that occur during the API call
                                 print('Error occurred: $e');
-                              }
+                              }setState(() {
+                                isLoading = false;
+                              });
                             }
                           },
 

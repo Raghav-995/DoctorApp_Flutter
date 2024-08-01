@@ -1,3 +1,4 @@
+import 'package:Seerecs/Screens/BottomNavigation/careTeam.dart';
 import 'package:Seerecs/Screens/CareTeam/AddProvider.dart';
 import 'package:Seerecs/Screens/BottomNavigation.dart';
 import 'package:dio/dio.dart';
@@ -130,7 +131,7 @@ class _getProviderState extends State<getProvider> {
 
   void navigateToNextScreen(BuildContext context) {
     // Navigate to the desired screen using Navigator.push
-    Navigator.push(context, CustomPageRoute(child: BottomNavigation()));
+    Navigator.pushReplacement(context, CustomPageRoute(child: BottomNavigation()));
   }
   // Map<String, int> careTeamProviderCount = {};
   //
@@ -173,8 +174,8 @@ class _getProviderState extends State<getProvider> {
           backgroundColor: Color(0xFFECF0FD),
           leading: BackButton(
             color: Color(0xFF02486A),
-            onPressed: () => Navigator.pop(context)//push(
-                //context, CustomPageRoute(child: BottomNavigation())),
+            onPressed: () =>     Navigator.pushReplacement(context, MaterialPageRoute(builder: (_){return CareTeam();})),
+
           ),
           centerTitle: true,
           flexibleSpace: Container(

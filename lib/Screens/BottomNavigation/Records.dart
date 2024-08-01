@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:Seerecs/Screens/BottomNavigation%20Screens/BottomNavigationContentScreens/MyActivity.dart';
 import 'package:Seerecs/Screens/Record_screens/Allergies.dart';
 import 'package:Seerecs/Screens/Record_screens/EmptyScreen.dart';
+import 'package:Seerecs/Screens/Record_screens/Record.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,7 +59,7 @@ class Records extends StatefulWidget {
     image: "assets/contract 1.png",
   );
   Items item9 = new Items(
-    title: "TBD",
+    title: "Records",
     event: "3 new",
     image: "assets/megaphone 1.png",
   );
@@ -127,8 +128,12 @@ var response = await dio.request(
   ),
   data: data,
 );
+ 
+ if(dataType == "Records"){
+      Navigator.of(context).push(MaterialPageRoute(builder: (_){return   Record(records: response.data,);},));
+ }
 
-if (response.statusCode == 200) {
+else if (response.statusCode == 200) {
   print(json.encode(response.data));
   if(response.data['fhirData'] != null){
     Navigator.of(context).push(MaterialPageRoute(builder: (_){return  Allergies(medicalType: dataType, reports: response.data);},));
@@ -575,9 +580,12 @@ finally {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          CardWidget(
-                            title: 'Heart surgeon',
-                            image: 'assets/heart (2) 1.png',
+                          GestureDetector(
+                            onTap: logout,
+                            child: CardWidget(
+                              title: 'Heart surgeon',
+                              image: 'assets/heart (2) 1.png',
+                            ),
                           ),
                           CardWidget(
                             title: 'Psychologist',
